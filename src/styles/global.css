@@ -26,6 +26,9 @@
 
 @layer base {
   html {
+    /* Hauteur du menu sticky : les ancres (#diagnostic, #interventions…) ne passent pas dessous */
+    --hauteur-header: 6.5rem;
+    scroll-padding-top: calc(var(--hauteur-header) + 0.5rem);
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
   }
@@ -39,6 +42,9 @@
   }
   .sur-fonce :focus-visible {
     outline-color: var(--color-etincelle);
+  }
+  @media (width >= 40rem) {
+    html { --hauteur-header: 5.25rem; }
   }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }

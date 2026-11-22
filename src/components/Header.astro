@@ -4,30 +4,34 @@ import { navigation } from '../data/site';
 
 const courant = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
-<header class="w-full border-b border-trait bg-beige">
-  <div class="conteneur flex flex-wrap items-center justify-between gap-4 py-[18px]">
+<!--
+  Menu fixé en haut de l'écran (sticky).
+  Mobile : logo + « Parlons-en » sur la 1re ligne, liens sur la 2e (en-tête compact).
+  À partir de sm : tout sur une ligne, comme la maquette.
+  La hauteur sert au décalage des ancres : --hauteur-header dans global.css.
+-->
+<header class="sticky top-0 z-40 w-full border-b border-trait bg-beige">
+  <div class="conteneur flex flex-wrap items-center justify-between gap-x-7 gap-y-1 py-2.5 sm:py-[18px]">
     <a href="/" aria-label="Beppe, retour à l'accueil" class="no-underline">
-      <Logo variante="clair" taille={44} />
+      <Logo variante="clair" taille={44} class="[&>svg]:size-9 [&>span]:text-[28px]! sm:[&>svg]:size-11 sm:[&>span]:text-[34px]!" />
     </a>
-    <nav aria-label="Navigation principale">
-      <ul class="m-0 flex list-none flex-wrap items-center gap-x-7 gap-y-2 p-0 text-base font-semibold">
+    <nav aria-label="Navigation principale" class="order-3 w-full sm:order-2 sm:ml-auto sm:w-auto">
+      <ul class="m-0 flex list-none items-center gap-6 p-0 text-[15px] font-semibold sm:gap-7 sm:text-base">
         {navigation.map((lien) => (
           <li>
             <a
               href={lien.href}
               aria-current={courant === lien.href ? 'page' : undefined}
-              class="text-olive no-underline decoration-2 underline-offset-[6px] hover:text-encre aria-[current=page]:underline"
+              class="inline-block py-1.5 text-olive no-underline decoration-2 underline-offset-[6px] hover:text-encre aria-[current=page]:underline"
             >{lien.label}</a>
           </li>
         ))}
-        <li>
-          <a
-            href="/contact"
-            aria-current={courant === '/contact' ? 'page' : undefined}
-            class="inline-block rounded-full bg-olive px-5 py-3 text-beige no-underline transition-colors hover:bg-encre"
-          >Parlons-en</a>
-        </li>
       </ul>
     </nav>
+    <a
+      href="/contact"
+      aria-current={courant === '/contact' ? 'page' : undefined}
+      class="order-2 inline-block rounded-full bg-olive px-4 py-2.5 text-[15px] font-semibold text-beige no-underline transition-colors hover:bg-encre sm:order-3 sm:px-5 sm:py-3 sm:text-base"
+    >Parlons-en</a>
   </div>
 </header>

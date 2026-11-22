@@ -70,7 +70,7 @@ const solutions = [
   {solutions.map((s, i) => {
     const fonce = i % 2 === 1;
     return (
-      <section id={s.id} class:list={['scroll-mt-4', fonce ? 'bg-beige-fonce' : 'bg-beige']} aria-labelledby={`${s.id}-titre`}>
+      <section id={s.id} class:list={[fonce ? 'bg-beige-fonce' : 'bg-beige']} aria-labelledby={`${s.id}-titre`}>
         <div class="conteneur flex flex-col gap-8 py-16 md:py-20">
           <div class="flex max-w-[760px] flex-col gap-3">
             <p class="surtitre text-brique">{s.metiers}</p>
