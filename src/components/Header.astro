@@ -6,32 +6,115 @@ const courant = Astro.url.pathname.replace(/\/$/, '') || '/';
 ---
 <!--
   Menu fixé en haut de l'écran (sticky).
-  Mobile : logo + « Parlons-en » sur la 1re ligne, liens sur la 2e (en-tête compact).
+  Mobile (< sm) : logo + « Parlons-en » + bouton burger ; les liens s'ouvrent dans un panneau.
   À partir de sm : tout sur une ligne, comme la maquette.
   La hauteur sert au décalage des ancres : --hauteur-header dans global.css.
 -->
-<header class="sticky top-0 z-40 w-full border-b border-trait bg-beige">
-  <div class="conteneur flex flex-wrap items-center justify-between gap-x-7 gap-y-1 py-2.5 sm:py-[18px]">
-    <a href="/" aria-label="Beppe, retour à l'accueil" class="no-underline">
+<header id="menu-principal" class="sticky top-0 z-40 w-full border-b border-trait bg-beige">
+  <div class="conteneur flex items-center gap-3 py-2.5 sm:gap-7 sm:py-[18px]">
+    <a href="/" aria-label="Beppe, retour à l'accueil" class="mr-auto no-underline">
       <Logo variante="clair" taille={44} class="[&>svg]:size-9 [&>span]:text-[28px]! sm:[&>svg]:size-11 sm:[&>span]:text-[34px]!" />
     </a>
-    <nav aria-label="Navigation principale" class="order-3 w-full sm:order-2 sm:ml-auto sm:w-auto">
-      <ul class="m-0 flex list-none items-center gap-6 p-0 text-[15px] font-semibold sm:gap-7 sm:text-base">
+
+    <nav
+      id="menu-liens"
+      aria-label="Navigation principale"
+      class="menu-panneau absolute inset-x-0 top-full border-b border-trait bg-beige shadow-[0_12px_24px_-12px_rgb(30_31_23/0.25)] sm:static sm:block sm:border-0 sm:bg-transparent sm:shadow-none"
+    >
+      <ul class="conteneur m-0 flex list-none flex-col py-2 text-lg font-semibold sm:w-auto sm:flex-row sm:items-center sm:gap-7 sm:p-0 sm:text-base">
         {navigation.map((lien) => (
-          <li>
+          <li class="border-b border-trait last:border-0 sm:border-0">
             <a
               href={lien.href}
               aria-current={courant === lien.href ? 'page' : undefined}
-              class="inline-block py-1.5 text-olive no-underline decoration-2 underline-offset-[6px] hover:text-encre aria-[current=page]:underline"
-            >{lien.label}</a>
+              class="flex items-center justify-between py-4 text-olive no-underline decoration-2 underline-offset-[6px] hover:text-encre aria-[current=page]:underline sm:inline-block sm:py-1.5"
+            >
+              {lien.label}
+              <span aria-hidden="true" class="sm:hidden">→</span>
+            </a>
           </li>
         ))}
       </ul>
     </nav>
+
     <a
       href="/contact"
       aria-current={courant === '/contact' ? 'page' : undefined}
-      class="order-2 inline-block rounded-full bg-olive px-4 py-2.5 text-[15px] font-semibold text-beige no-underline transition-colors hover:bg-encre sm:order-3 sm:px-5 sm:py-3 sm:text-base"
+      class="inline-block rounded-full bg-olive px-4 py-2.5 text-[15px] font-semibold text-beige no-underline transition-colors hover:bg-encre sm:px-5 sm:py-3 sm:text-base"
     >Parlons-en</a>
+
+    <button
+      type="button"
+      id="menu-bouton"
+      class="menu-bouton -mr-2 inline-flex size-11 cursor-pointer items-center justify-center rounded-full border-0 bg-transparent text-olive hover:bg-beige-fonce sm:hidden"
+      aria-controls="menu-liens"
+      aria-expanded="false"
+      aria-label="Ouvrir le menu"
+    >
+      <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+        <path class="trait-1" d="M4 7h16"></path>
+        <path class="trait-2" d="M4 12h16"></path>
+        <path class="trait-3" d="M4 17h16"></path>
+      </svg>
+    </button>
   </div>
 </header>
+
+<!-- Sans JavaScript, le panneau reste affiché pour que les liens soient accessibles -->
+<noscript><style>.menu-panneau { display: block !important; position: static !important; } .menu-bouton { display: none !important; }</style></noscript>
+
+<style>
+  /* Mobile : panneau fermé par défaut, ouvert quand le header porte data-ouvert */
+  @media (width < 40rem) {
+    .menu-panneau { display: none; }
+    header[data-ouvert] .menu-panneau { display: block; }
+  }
+  .menu-bouton path { transition: transform 0.2s ease, opacity 0.2s ease; transform-origin: 12px 12px; }
+  header[data-ouvert] .trait-1 { transform: translateY(5px) rotate(45deg); }
+  header[data-ouvert] .trait-2 { opacity: 0; }
+  header[data-ouvert] .trait-3 { transform: translateY(-5px) rotate(-45deg); }
+  @media (prefers-reduced-motion: reduce) {
+    .menu-bouton path { transition: none; }
+  }
+</style>
+
+<script>
+  const header = document.getElementById('menu-principal');
+  const bouton = document.getElementById('menu-bouton') as HTMLButtonElement | null;
+  const panneau = document.getElementById('menu-liens');
+
+  if (header && bouton && panneau) {
+    const ouvrir = (ouvert: boolean) => {
+      header.toggleAttribute('data-ouvert', ouvert);
+      bouton.setAttribute('aria-expanded', String(ouvert));
+      bouton.setAttribute('aria-label', ouvert ? 'Fermer le menu' : 'Ouvrir le menu');
+    };
+    const estOuvert = () => header.hasAttribute('data-ouvert');
+
+    bouton.addEventListener('click', () => {
+      ouvrir(!estOuvert());
+      if (estOuvert()) panneau.querySelector('a')?.focus();
+    });
+
+    // Échap ferme le menu et rend le focus au bouton
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && estOuvert()) {
+        ouvrir(false);
+        bouton.focus();
+      }
+    });
+
+    // Clic en dehors du menu, ou sur un lien (ancre sur la même page) : on ferme
+    document.addEventListener('click', (e) => {
+      if (estOuvert() && !header.contains(e.target as Node)) ouvrir(false);
+    });
+    panneau.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) ouvrir(false);
+    });
+
+    // Passage en affichage large : on remet à zéro
+    matchMedia('(width >= 40rem)').addEventListener('change', (e) => {
+      if (e.matches) ouvrir(false);
+    });
+  }
+</script>

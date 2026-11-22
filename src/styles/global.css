@@ -27,7 +27,7 @@
 @layer base {
   html {
     /* Hauteur du menu sticky : les ancres (#diagnostic, #interventions…) ne passent pas dessous */
-    --hauteur-header: 6.5rem;
+    --hauteur-header: 3.75rem;
     scroll-padding-top: calc(var(--hauteur-header) + 0.5rem);
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
