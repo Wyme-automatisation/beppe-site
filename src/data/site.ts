@@ -6,7 +6,7 @@ export const site = {
   email: 'bonjour@beppe.fr',
   // [champ à compléter] — laisser tel quel tant que le numéro n'est pas fixé
   telephone: '[Téléphone]',
-  zone: ['Maine-et-Loire', 'Vendée'],
+  zone: ['Maine-et-Loire'],
 };
 
 export const navigation = [

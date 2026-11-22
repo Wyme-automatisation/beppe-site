@@ -1,7 +1,7 @@
 # Site beppe.fr — cahier des charges pour Claude Code
 
 ## Le projet
-Site vitrine de **Beppe**, atelier local qui fabrique des outils numériques sur mesure (IA, automatisation, développement) pour les artisans, TPE et PME (de quelques personnes à une centaine de salariés), en Maine-et-Loire, Vendée et alentours.
+Site vitrine de **Beppe**, atelier local qui fabrique des outils numériques sur mesure (IA, automatisation, développement) pour les artisans, TPE et PME (de quelques personnes à une centaine de salariés), en Maine-et-Loire et alentours (basé à Cholet et Angers). Zone affichée sur le site : « Maine-et-Loire » uniquement ; des villes de Vendée ou d'ailleurs peuvent être citées si besoin.
 
 - Exploitant : WYME SASU (nom commercial « Beppe »). WYME n'apparaît que dans les mentions légales.
 - Domaine : beppe.fr — e-mail de contact : bonjour@beppe.fr
@@ -45,7 +45,7 @@ Style : néo-rétro, sobre, beaucoup d'air, coins arrondis (14–16 px cartes, p
 - Site statique, rapide, simple à maintenir. Stack conseillée : **Astro + Tailwind CSS** (tokens de la charte dans la config), sans framework JS lourd.
 - Responsive (mobile d'abord : beaucoup de dirigeants consulteront sur téléphone).
 - Accessible : contrastes AA, vrais `<button>`/`<a>`/`<label>`, `alt` sur les images, navigation au clavier.
-- SEO local : balises title/description par page, données structurées LocalBusiness (zone : Maine-et-Loire, Vendée), sitemap, robots.txt, Open Graph.
+- SEO local : balises title/description par page, données structurées LocalBusiness (zone : Maine-et-Loire), sitemap, robots.txt, Open Graph.
 - Formulaire : envoi en POST vers une URL de webhook configurable par variable d'environnement (`PUBLIC_FORM_ENDPOINT`), prévue pour un workflow n8n. Message de confirmation affiché sur la page, gestion d'erreur, protection anti-spam simple (champ caché « honeypot »). Pas de stockage côté site.
 - Aucun cookie ni outil de suivi tant que ce n'est pas décidé (pas de bannière cookies nécessaire dans ce cas).
 - Pas de faux contenu : pas de témoignages, logos clients, chiffres ou prix inventés. Garder les [champs à compléter] visibles.
