@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+
+/*
+ * Texte à compléter avant la mise en ligne (validation expert-comptable / juriste).
+ * Les [champs à compléter] sont volontairement surlignés à l'affichage :
+ * il suffit de remplacer le texte entre crochets ci-dessous.
+ */
+const sections = [
+  {
+    titre: 'Éditeur du site',
+    paragraphes: [
+      'Le site beppe.fr est édité par WYME, société par actions simplifiée unipersonnelle (SASU) au capital de [montant] €, exploitant le nom commercial « Beppe ».',
+      'Siège social : [adresse complète].',
+      'RCS [ville] [numéro] · SIREN [numéro] · TVA intracommunautaire [numéro].',
+      'Directeur de la publication : [Prénom Nom], président.',
+      `Contact : ${site.email} · ${site.telephone}.`,
+    ],
+  },
+  {
+    titre: 'Hébergement',
+    paragraphes: ["Le site est hébergé par [nom de l'hébergeur], [adresse], [téléphone]."],
+  },
+  {
+    titre: 'Propriété intellectuelle',
+    paragraphes: [
+      'Les textes, illustrations, logos et éléments graphiques du site sont la propriété de WYME, sauf mention contraire. Toute reproduction sans autorisation est interdite.',
+    ],
+  },
+  {
+    titre: 'Données personnelles',
+    paragraphes: [
+      'Les informations transmises par le formulaire de contact servent uniquement à vous recontacter au sujet de votre demande. Elles ne sont ni vendues ni cédées à des tiers.',
+      'Elles sont conservées [durée] au maximum après le dernier échange.',
+      `Vous pouvez demander l'accès, la rectification ou la suppression de vos données en écrivant à ${site.email}. Vous pouvez aussi saisir la CNIL.`,
+    ],
+  },
+  {
+    titre: 'Cookies',
+    paragraphes: ["[À compléter selon les outils utilisés sur le site, par exemple la mesure d'audience.]"],
+  },
+];
+
+// Découpe un paragraphe pour surligner les [champs à compléter]
+const morceaux = (texte: string) =>
+  texte.split(/(\[[^\]]+\])/g).filter(Boolean).map((t) => ({ texte: t, champ: t.startsWith('[') }));
+---
+<BaseLayout
+  title="Mentions légales — Beppe"
+  description="Mentions légales du site beppe.fr : éditeur, hébergement, propriété intellectuelle, données personnelles et cookies."
+>
+  <PageHero
+    fil={[{ label: 'Accueil', href: '/' }, { label: 'Mentions légales' }]}
+    surtitre="Informations légales"
+    titre="Mentions légales"
+    chapo="Les informations sur l'éditeur et l'hébergeur du site beppe.fr."
+  />
+
+  <div class="mx-auto flex w-full max-w-[860px] flex-col gap-10 px-5 py-16 sm:px-6 md:py-[72px]">
+    {sections.map((s) => (
+      <section class="flex flex-col gap-2.5">
+        <h2 class="m-0 font-titre text-[1.625rem] font-bold text-olive">{s.titre}</h2>
+        {s.paragraphes.map((p) => (
+          <p class="m-0 text-base leading-[1.6] text-encre">
+            {morceaux(p).map((m) =>
+              m.champ ? <mark class="rounded bg-brique/10 px-1 text-brique">{m.texte}</mark> : m.texte
+            )}
+          </p>
+        ))}
+      </section>
+    ))}
+  </div>
+</BaseLayout>

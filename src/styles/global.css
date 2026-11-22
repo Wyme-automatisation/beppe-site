@@ -1,0 +1,58 @@
+@import "@fontsource-variable/fraunces/opsz.css";
+@import "@fontsource-variable/fraunces/opsz-italic.css";
+@import "@fontsource-variable/familjen-grotesk/index.css";
+@import "tailwindcss";
+
+/* Charte graphique Beppe — tokens */
+@theme {
+  --color-beige: #F3ECE1;        /* Beige atelier — fond */
+  --color-beige-fonce: #EAE2D3;  /* Sections alternées */
+  --color-olive: #394429;        /* Marque, fonds forts */
+  --color-etincelle: #D4FF33;    /* Petites touches sur fond olive uniquement */
+  --color-brique: #C2361F;       /* Accents sur fond clair */
+  --color-encre: #1E1F17;        /* Texte, pied de page */
+  --color-texte-2: #4A4D3C;      /* Texte secondaire */
+  --color-trait: #DCD3C3;        /* Filets sur fond clair */
+  --color-gris-chaud: #C9C2B4;   /* Texte discret sur fond foncé */
+  --color-beige-doux: #E4DDCF;   /* Texte courant sur fond olive */
+  --color-trait-fonce: #3A3B31;  /* Filet sur fond encre */
+
+  --font-titre: "Fraunces Variable", Georgia, serif;
+  --font-texte: "Familjen Grotesk Variable", system-ui, sans-serif;
+
+  --radius-carte: 14px;
+  --radius-carte-lg: 16px;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-beige text-encre font-texte antialiased;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-brique);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .sur-fonce :focus-visible {
+    outline-color: var(--color-etincelle);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+}
+
+@layer components {
+  .conteneur {
+    @apply mx-auto w-full max-w-[1200px] px-5 sm:px-6;
+  }
+  .surtitre {
+    @apply m-0 text-sm font-bold uppercase tracking-[0.2em];
+  }
+  .bouton {
+    @apply inline-flex items-center justify-center rounded-full px-7 py-4 text-[17px] font-bold no-underline transition-colors;
+  }
+}

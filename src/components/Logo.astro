@@ -1,0 +1,45 @@
+---
+/**
+ * Logo Beppe : croix de marionnettiste aux trois fils coupés + étincelle,
+ * à côté du mot « Beppe ». Jamais de texte collé dessous.
+ *   variante="clair"  → olive, pour fond clair
+ *   variante="fonce"  → beige, pour fond foncé
+ *   symbole           → croix seule, sans le mot
+ */
+interface Props {
+  variante?: 'clair' | 'fonce';
+  taille?: number;
+  symbole?: boolean;
+  class?: string;
+}
+const { variante = 'clair', taille = 44, symbole = false, class: className = '' } = Astro.props;
+const c = variante === 'clair' ? '#394429' : '#F3ECE1';
+const motTaille = Math.round(taille * 0.77);
+---
+<span class:list={['inline-flex items-center gap-2.5', className]}>
+  <svg width={taille} height={taille} viewBox="0 0 120 120" aria-hidden="true" class="shrink-0">
+    <rect x="14" y="22" width="92" height="12" rx="6" fill={c}></rect>
+    <rect x="54" y="8" width="12" height="46" rx="6" fill={c}></rect>
+    <g stroke={c} stroke-width="4" stroke-linecap="round">
+      <line x1="22" y1="34" x2="22" y2="72"></line>
+      <line x1="98" y1="34" x2="98" y2="72"></line>
+      <line x1="60" y1="54" x2="60" y2="68"></line>
+      <g opacity="0.3">
+        <line x1="25" y1="84" x2="25" y2="106"></line>
+        <line x1="95" y1="84" x2="95" y2="106"></line>
+        <line x1="60" y1="96" x2="60" y2="110"></line>
+      </g>
+    </g>
+    {variante === 'clair' ? (
+      <path d="M60 70 L63.5 78.5 L72 82 L63.5 85.5 L60 94 L56.5 85.5 L48 82 L56.5 78.5 Z" fill="#D4FF33" stroke="#394429" stroke-width="2" stroke-linejoin="round"></path>
+    ) : (
+      <path d="M60 70 L63.5 78.5 L72 82 L63.5 85.5 L60 94 L56.5 85.5 L48 82 L56.5 78.5 Z" fill="#D4FF33"></path>
+    )}
+  </svg>
+  {!symbole && (
+    <span
+      class="font-titre italic font-extrabold leading-none"
+      style={`font-size:${motTaille}px;color:${c}`}
+    >Beppe</span>
+  )}
+</span>

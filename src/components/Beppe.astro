@@ -1,0 +1,97 @@
+---
+/**
+ * Le personnage Beppe (SVG au trait). Usage discret uniquement.
+ *   portrait   → version complète en olive (crayon brique, loupe étincelle)
+ *   filigrane  → version claire pour fond olive, à poser avec ~12–15 % d'opacité
+ *   filigrane-simple → filigrane allégé (en-tête des pages intérieures)
+ *   pastille   → version simplifiée pour un rond olive
+ * Jamais collé au logo.
+ */
+interface Props {
+  variante?: 'portrait' | 'filigrane' | 'filigrane-simple' | 'pastille';
+  label?: string;
+  class?: string;
+  style?: string;
+  width?: string | number;
+  height?: string | number;
+}
+const {
+  variante = 'portrait',
+  label,
+  class: className,
+  style,
+  width = '100%',
+  height = '100%',
+} = Astro.props;
+
+// Traits communs
+const corps = 'M36 240 C 48 192, 92 174, 120 174 C 148 174, 192 192, 204 240';
+const visage = 'M82 100 C 80 136, 92 158, 120 162 C 148 158, 160 136, 158 100';
+const oeil = 'M98 114 Q 104 110 110 114';
+const nez = 'M120 116 L 114 132 L 122 133';
+const moustache = 'M100 142 C 108 136, 116 137, 120 141 C 124 137, 132 136, 140 142';
+const barbe = 'M86 126 C 90 160, 106 174, 120 176 C 134 174, 150 160, 154 126';
+const casquette = 'M74 98 C 72 60, 160 50, 166 90 C 140 82, 104 84, 74 98 Z';
+const visiere = 'M118 88 C 148 84, 176 86, 184 96 C 162 95, 140 95, 118 97 Z';
+
+const details = [
+  'M98 180 L 92 240',
+  'M142 180 L 148 240',
+  'M80 108 C 72 106, 70 120, 80 124',
+  'M96 104 L 110 102',
+  'M128 100 L 146 98',
+  'M150 108 L 162 104',
+];
+const detailsPortrait = [
+  'M106 152 L 104 176',
+  'M134 152 L 136 176',
+  'M104 152 L 106 160',
+  'M120 154 L 120 164',
+  'M136 152 L 134 160',
+];
+
+let traits: string[] = [];
+let couleur = '#394429';
+let epaisseur = 3.5;
+if (variante === 'portrait') {
+  traits = [corps, details[0], details[1], detailsPortrait[0], detailsPortrait[1], visage, details[2], oeil, details[3], details[4], nez, moustache, barbe, detailsPortrait[2], detailsPortrait[3], detailsPortrait[4], details[5]];
+} else if (variante === 'filigrane') {
+  couleur = '#F3ECE1';
+  traits = [corps, details[0], details[1], visage, details[2], oeil, details[3], details[4], nez, moustache, barbe, details[5]];
+} else if (variante === 'filigrane-simple') {
+  couleur = '#F3ECE1';
+  traits = [corps, visage, oeil, nez, moustache, barbe];
+} else {
+  couleur = '#F3ECE1';
+  epaisseur = 6;
+  traits = [corps, visage, oeil, nez, moustache, barbe];
+}
+const decoratif = !label;
+---
+<svg
+  width={width}
+  height={height}
+  viewBox="0 0 240 240"
+  class={className}
+  style={style}
+  role={decoratif ? undefined : 'img'}
+  aria-label={label}
+  aria-hidden={decoratif ? 'true' : undefined}
+>
+  <g fill="none" stroke={couleur} stroke-width={epaisseur} stroke-linecap="round" stroke-linejoin="round">
+    {traits.map((d) => <path d={d}></path>)}
+    {(variante === 'filigrane' || variante === 'filigrane-simple') && <circle cx="138" cy="114" r="13"></circle>}
+  </g>
+  <path d={casquette} fill={couleur}></path>
+  <path d={visiere} fill={couleur}></path>
+  {variante === 'portrait' && (
+    <>
+      <path d="M162 98 L 180 76" stroke="#C2361F" stroke-width="5" stroke-linecap="round"></path>
+      <circle cx="138" cy="114" r="13" fill="#D4FF33" stroke="#394429" stroke-width="3.5"></circle>
+      <path d="M138 106 L 140 112 L 146 114 L 140 116 L 138 122 L 136 116 L 130 114 L 136 112 Z" fill="#394429"></path>
+    </>
+  )}
+  {variante === 'pastille' && (
+    <circle cx="138" cy="114" r="13" fill="#D4FF33" stroke="#F3ECE1" stroke-width="5"></circle>
+  )}
+</svg>

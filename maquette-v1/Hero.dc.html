@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Beppe — en-tête de page</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&amp;family=Familjen+Grotesk:wght@400..700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<section style="width: 100%; background: #394429; position: relative; overflow: hidden; font-family: 'Familjen Grotesk', system-ui, sans-serif; color: #F3ECE1">
+<svg width="420" height="420" viewBox="0 0 240 240" aria-hidden="true" style="position: absolute; right: -60px; bottom: -70px; opacity: 0.12">
+<g fill="none" stroke="#F3ECE1" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+<path d="M36 240 C 48 192, 92 174, 120 174 C 148 174, 192 192, 204 240"></path>
+<path d="M82 100 C 80 136, 92 158, 120 162 C 148 158, 160 136, 158 100"></path>
+<path d="M98 114 Q 104 110 110 114"></path>
+<path d="M120 116 L 114 132 L 122 133"></path>
+<path d="M100 142 C 108 136, 116 137, 120 141 C 124 137, 132 136, 140 142"></path>
+<path d="M86 126 C 90 160, 106 174, 120 176 C 134 174, 150 160, 154 126"></path>
+<circle cx="138" cy="114" r="13"></circle>
+</g>
+<path d="M74 98 C 72 60, 160 50, 166 90 C 140 82, 104 84, 74 98 Z" fill="#F3ECE1"></path>
+<path d="M118 88 C 148 84, 176 86, 184 96 C 162 95, 140 95, 118 97 Z" fill="#F3ECE1"></path>
+</svg>
+<div style="position: relative; max-width: 1200px; margin: 0 auto; padding: 64px 24px 80px; display: flex; flex-direction: column; gap: 18px">
+<p style="margin: 0; font-size: 14px; color: #C9C2B4">{{fil}}</p>
+<p style="margin: 0; font-size: 14px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #D4FF33">{{surtitre}}</p>
+<h1 style="margin: 0; max-width: 860px; font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 700; font-size: 3.5rem; line-height: 1.05; color: #F3ECE1">{{titre}}</h1>
+<p style="margin: 0; max-width: 680px; font-size: 1.2rem; line-height: 1.55; color: #E4DDCF">{{chapo}}</p>
+</div>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"fil":{"editor":"text","default":"Accueil / Page"},"surtitre":{"editor":"text","default":"Rubrique"},"titre":{"editor":"text","default":"Titre de la page"},"chapo":{"editor":"text","default":"Une phrase qui résume la page."},"$preview":{"width":1440,"height":440}}'>
+class Component extends DCLogic {
+renderVals() {
+return {
+fil: this.props.fil ?? 'Accueil / Page',
+surtitre: this.props.surtitre ?? 'Rubrique',
+titre: this.props.titre ?? 'Titre de la page',
+chapo: this.props.chapo ?? 'Une phrase qui résume la page.'
+};
+}
+}
+</script>
+</body>
+</html>

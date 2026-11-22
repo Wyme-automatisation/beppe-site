@@ -1,0 +1,33 @@
+---
+import Logo from './Logo.astro';
+import { navigation } from '../data/site';
+
+const courant = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+<header class="w-full border-b border-trait bg-beige">
+  <div class="conteneur flex flex-wrap items-center justify-between gap-4 py-[18px]">
+    <a href="/" aria-label="Beppe, retour à l'accueil" class="no-underline">
+      <Logo variante="clair" taille={44} />
+    </a>
+    <nav aria-label="Navigation principale">
+      <ul class="m-0 flex list-none flex-wrap items-center gap-x-7 gap-y-2 p-0 text-base font-semibold">
+        {navigation.map((lien) => (
+          <li>
+            <a
+              href={lien.href}
+              aria-current={courant === lien.href ? 'page' : undefined}
+              class="text-olive no-underline decoration-2 underline-offset-[6px] hover:text-encre aria-[current=page]:underline"
+            >{lien.label}</a>
+          </li>
+        ))}
+        <li>
+          <a
+            href="/contact"
+            aria-current={courant === '/contact' ? 'page' : undefined}
+            class="inline-block rounded-full bg-olive px-5 py-3 text-beige no-underline transition-colors hover:bg-encre"
+          >Parlons-en</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,207 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+
+// URL du webhook n8n — à définir chez l'hébergeur (voir .env.example)
+const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT ?? '';
+
+const champ =
+  'min-h-12 w-full rounded-[10px] border-[1.5px] border-[#8F8676] bg-white px-3.5 py-3 text-base font-normal text-encre focus:border-olive focus-visible:outline-brique';
+const libelle = 'flex flex-col gap-1.5 text-sm font-semibold text-encre';
+---
+<BaseLayout
+  title="Contact — Beppe | Réserver votre diagnostic offert"
+  description="Réservez votre diagnostic Beppe : une heure, chez vous ou en visio, pour repérer les trois tâches qui vous coûtent le plus. Offert, sans engagement. Maine-et-Loire, Vendée et alentours."
+>
+  <PageHero
+    fil={[{ label: 'Accueil', href: '/' }, { label: 'Contact' }]}
+    surtitre="Contact"
+    titre="Commençons par un diagnostic."
+    chapo="Une heure, chez vous ou en visio, pour repérer les trois tâches qui vous coûtent le plus. Offert, sans engagement. Décrivez-nous la situation en quelques lignes, on vous rappelle."
+  />
+
+  <section class="conteneur flex flex-wrap gap-12 py-16 md:py-20">
+    <div class="flex-[2_1_460px]">
+      <form
+        id="form-contact"
+        action={endpoint || undefined}
+        method="post"
+        data-endpoint={endpoint}
+        class="flex flex-col gap-4 rounded-[18px] bg-white p-6 sm:p-8"
+        novalidate
+      >
+        <p class="m-0 text-sm text-texte-2">Les champs marqués <span aria-hidden="true">*</span><span class="sr-only">d'un astérisque</span> sont obligatoires.</p>
+
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class={libelle}>
+            <span>Nom <span aria-hidden="true" class="text-brique">*</span></span>
+            <input type="text" name="nom" autocomplete="name" required class={champ} />
+          </label>
+          <label class={libelle}>
+            Entreprise
+            <input type="text" name="entreprise" autocomplete="organization" class={champ} />
+          </label>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-2">
+          <label class={libelle}>
+            <span>E-mail <span aria-hidden="true" class="text-brique">*</span></span>
+            <input type="email" name="email" autocomplete="email" required class={champ} />
+          </label>
+          <label class={libelle}>
+            Téléphone
+            <input type="tel" name="telephone" autocomplete="tel" class={champ} />
+          </label>
+        </div>
+        <label class={libelle}>
+          Votre demande
+          <select name="demande" class={champ}>
+            <option>Réserver un diagnostic</option>
+            <option>Poser une question</option>
+          </select>
+        </label>
+        <label class={libelle}>
+          Votre secteur
+          <select name="secteur" class={champ}>
+            <option>BTP et artisans</option>
+            <option>Industrie</option>
+            <option>Négoce</option>
+            <option>Services</option>
+            <option>Autre</option>
+          </select>
+        </label>
+        <label class={libelle}>
+          <span>Qu'est-ce qui vous fait perdre du temps ? <span aria-hidden="true" class="text-brique">*</span></span>
+          <textarea name="message" rows="5" required class={`${champ} resize-y`}></textarea>
+        </label>
+
+        <!-- Anti-spam : champ invisible pour les humains, rempli par les robots -->
+        <div aria-hidden="true" class="absolute -left-[9999px] h-px w-px overflow-hidden">
+          <label>Ne pas remplir ce champ<input type="text" name="site_web" tabindex="-1" autocomplete="off" /></label>
+        </div>
+
+        <p class="m-0 text-[13px] leading-normal text-texte-2">
+          Vos coordonnées servent uniquement à vous recontacter au sujet de votre demande. Elles ne sont ni vendues ni cédées à des tiers. Voir les <a href="/mentions-legales" class="text-olive underline">mentions légales</a>.
+        </p>
+
+        <button
+          type="submit"
+          class="min-h-[52px] cursor-pointer rounded-full border-0 bg-olive px-7 text-[17px] font-bold text-beige transition-colors hover:bg-encre disabled:cursor-wait disabled:opacity-70"
+        >Envoyer</button>
+
+        <div id="form-statut" role="status" aria-live="polite" class="empty:hidden"></div>
+      </form>
+
+      <div id="form-merci" class="hidden flex-col gap-3 rounded-[18px] bg-white p-6 sm:p-8" tabindex="-1">
+        <p class="surtitre text-brique">Message envoyé</p>
+        <h2 class="m-0 font-titre text-[1.75rem] font-bold text-olive">Merci, c'est bien reçu.</h2>
+        <p class="m-0 text-base leading-[1.55] text-texte-2">On vous rappelle pour fixer un moment d'échange.</p>
+      </div>
+    </div>
+
+    <aside class="flex flex-[1_1_300px] flex-col gap-7">
+      <div class="flex flex-col gap-4">
+        <h2 class="m-0 font-titre text-[1.75rem] font-bold text-olive">Et ensuite ?</h2>
+        <ol class="m-0 flex list-none flex-col gap-4 p-0">
+          <li class="flex gap-3.5">
+            <span aria-hidden="true" class="font-titre text-[1.75rem] font-extrabold italic leading-none text-brique">1</span>
+            <p class="m-0 text-[15px] leading-[1.55] text-texte-2"><strong class="text-encre">On vous rappelle</strong> pour fixer un moment d'échange.</p>
+          </li>
+          <li class="flex gap-3.5">
+            <span aria-hidden="true" class="font-titre text-[1.75rem] font-extrabold italic leading-none text-brique">2</span>
+            <p class="m-0 text-[15px] leading-[1.55] text-texte-2"><strong class="text-encre">On écoute votre situation</strong>, chez vous ou à distance.</p>
+          </li>
+          <li class="flex gap-3.5">
+            <span aria-hidden="true" class="font-titre text-[1.75rem] font-extrabold italic leading-none text-brique">3</span>
+            <p class="m-0 text-[15px] leading-[1.55] text-texte-2"><strong class="text-encre">On vous dit franchement</strong> si on peut vous aider, et comment.</p>
+          </li>
+        </ol>
+      </div>
+      <div class="flex flex-col gap-2 rounded-carte-lg bg-beige-fonce p-6 text-[15px] leading-normal">
+        <p class="m-0 font-bold">Nous joindre directement</p>
+        <p class="m-0">{site.telephone}</p>
+        <p class="m-0"><a href={`mailto:${site.email}`} class="text-olive underline hover:text-encre">{site.email}</a></p>
+        <p class="m-0 text-texte-2">Maine-et-Loire, Vendée et alentours</p>
+      </div>
+    </aside>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('form-contact') as HTMLFormElement | null;
+  const statut = document.getElementById('form-statut');
+  const merci = document.getElementById('form-merci');
+
+  const EMAIL = 'bonjour@beppe.fr';
+
+  function afficher(message: string, type: 'erreur' | 'info') {
+    if (!statut) return;
+    statut.className =
+      type === 'erreur'
+        ? 'rounded-[10px] border-l-[3px] border-brique bg-beige px-4 py-3 text-[15px] text-encre'
+        : 'text-[15px] text-texte-2';
+    statut.innerHTML = message;
+  }
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const bouton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+      // Validation : on signale le premier champ invalide
+      if (!form.checkValidity()) {
+        const invalide = form.querySelector(':invalid') as HTMLInputElement | null;
+        afficher(
+          invalide?.type === 'email' && invalide.value
+            ? "L'adresse e-mail ne semble pas valide."
+            : 'Merci de remplir les champs obligatoires : nom, e-mail et message.',
+          'erreur'
+        );
+        invalide?.focus();
+        return;
+      }
+
+      const donnees = Object.fromEntries(new FormData(form).entries()) as Record<string, string>;
+
+      // Honeypot : un robot a rempli le champ caché → on fait comme si tout allait bien
+      if (donnees.site_web) {
+        form.classList.add('hidden');
+        merci?.classList.replace('hidden', 'flex');
+        return;
+      }
+      delete donnees.site_web;
+
+      const endpoint = form.dataset.endpoint;
+      if (!endpoint) {
+        afficher(
+          `Le formulaire n'est pas encore branché. Écrivez-nous à <a href="mailto:${EMAIL}" class="text-olive underline">${EMAIL}</a>.`,
+          'erreur'
+        );
+        return;
+      }
+
+      bouton.disabled = true;
+      bouton.textContent = 'Envoi en cours…';
+      afficher('', 'info');
+
+      try {
+        const reponse = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...donnees, page: location.pathname, envoye_le: new Date().toISOString() }),
+        });
+        if (!reponse.ok) throw new Error(String(reponse.status));
+        form.classList.add('hidden');
+        merci?.classList.replace('hidden', 'flex');
+        merci?.focus();
+      } catch {
+        afficher(
+          `L'envoi n'a pas fonctionné. Réessayez dans un instant, ou écrivez-nous à <a href="mailto:${EMAIL}" class="text-olive underline">${EMAIL}</a>.`,
+          'erreur'
+        );
+        bouton.disabled = false;
+        bouton.textContent = 'Envoyer';
+      }
+    });
+  }
+</script>

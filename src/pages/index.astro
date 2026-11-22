@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Beppe from '../components/Beppe.astro';
+import Cta from '../components/Cta.astro';
+
+const irritants = [
+  { titre: 'On recopie la même info partout', texte: "Du papier vers Excel, d'Excel vers le logiciel, du mail vers le tableau de suivi." },
+  { titre: 'Les fiches papier arrivent en retard', texte: 'Interventions, heures, bons : saisis en fin de semaine, quand ils ne se perdent pas.' },
+  { titre: "L'information est éparpillée", texte: 'Dans les boîtes mail, les têtes et les classeurs. Retrouver un dossier prend une heure.' },
+  { titre: 'Les relances passent à la trappe', texte: "Un prospect, un client, un fournisseur à rappeler… et personne ne l'a fait." },
+  { titre: 'Les comptes rendus prennent des heures', texte: 'Après chaque rendez-vous, il faut tout réécrire, puis penser aux actions qui suivent.' },
+  { titre: 'Tout repose sur une seule personne', texte: "Quand elle est absente, le processus s'arrête. Personne d'autre ne sait comment faire." },
+];
+
+const outils = [
+  { titre: 'Interventions sur téléphone', texte: "Les fiches d'intervention remplies sur le terrain, reçues aussitôt au bureau, les heures prêtes pour la paie.", href: '/solutions#interventions' },
+  { titre: 'Comptes rendus automatiques', texte: 'Après un rendez-vous, le compte rendu et les prochaines actions sont rédigés et rangés dans votre suivi.', href: '/solutions#comptes-rendus' },
+  { titre: 'Demandes entrantes', texte: 'Chaque mail, formulaire ou message est lu, classé et transmis à la bonne personne.', href: '/solutions#demandes' },
+];
+---
+<BaseLayout
+  title="Beppe — on fabrique vos outils sur mesure | IA, automatisation, développement"
+  description="Beppe fabrique des outils numériques sur mesure (IA, automatisation, développement) pour les artisans, TPE et PME en Maine-et-Loire et en Vendée. Diagnostic d'une heure offert."
+>
+  <!-- Haut de page -->
+  <section id="haut" class="sur-fonce relative overflow-hidden bg-olive">
+    <Beppe
+      variante="filigrane"
+      width="560"
+      height="560"
+      class="pointer-events-none absolute -bottom-[60px] -right-[200px] w-[420px] opacity-[0.14] sm:-right-[80px] sm:w-[560px]"
+    />
+    <div class="conteneur relative flex flex-col gap-7 pb-24 pt-20 md:pb-[120px] md:pt-28">
+      <p class="m-0 text-[13px] font-bold uppercase tracking-[0.2em] text-etincelle sm:text-[15px]">IA · Automatisation · Développement</p>
+      <h1 class="m-0 max-w-[820px] font-titre text-[2.75rem] font-bold italic leading-[1.02] text-beige sm:text-[3.5rem] lg:text-[4.5rem]">On fabrique vos outils sur mesure.</h1>
+      <p class="m-0 max-w-[640px] text-lg leading-[1.55] text-beige-doux sm:text-xl">Pour les artisans, TPE et PME qui en ont assez des ressaisies, des papiers qui se perdent et des informations éparpillées. On part de votre façon de travailler, et on construit l'outil qui tourne tout seul.</p>
+      <div class="flex flex-wrap gap-3.5 pt-2">
+        <a href="/contact" class="bouton bg-etincelle text-encre hover:bg-beige">Réserver mon diagnostic</a>
+        <a href="/solutions" class="bouton border-2 border-beige text-beige hover:bg-beige hover:text-olive">Voir nos solutions</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ce qui grippe vos journées -->
+  <section class="conteneur flex flex-col gap-10 py-20 md:py-24" aria-labelledby="irritants-titre">
+    <div class="flex max-w-[720px] flex-col gap-3">
+      <p class="surtitre text-brique">Ça vous parle ?</p>
+      <h2 id="irritants-titre" class="m-0 font-titre text-[2.25rem] font-bold leading-[1.1] text-olive md:text-[2.75rem]">Ce qui grippe vos journées</h2>
+      <p class="m-0 text-lg leading-[1.55] text-texte-2">Avant de parler technique, on regarde comment vous travaillez vraiment.</p>
+    </div>
+    <ul class="m-0 grid list-none gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
+      {irritants.map((i) => (
+        <li class="flex flex-col gap-2 rounded-carte bg-white p-6">
+          <h3 class="m-0 text-lg font-bold">{i.titre}</h3>
+          <p class="m-0 text-[15px] leading-normal text-texte-2">{i.texte}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Ce qu'on fabrique -->
+  <section class="bg-beige-fonce" aria-labelledby="outils-titre">
+    <div class="conteneur flex flex-col gap-8 py-20">
+      <div class="flex max-w-[720px] flex-col gap-3">
+        <p class="surtitre text-brique">Ce qu'on fabrique</p>
+        <h2 id="outils-titre" class="m-0 font-titre text-[2rem] font-bold leading-[1.15] text-olive md:text-[2.25rem]">Trois outils qu'on sait livrer dès aujourd'hui</h2>
+      </div>
+      <ul class="m-0 grid list-none gap-5 p-0 md:grid-cols-3">
+        {outils.map((o) => (
+          <li class="flex">
+            <a href={o.href} class="group flex w-full flex-col gap-2.5 rounded-carte-lg bg-beige p-7 text-encre no-underline outline-offset-4 transition-shadow hover:shadow-[0_0_0_2px_var(--color-olive)]">
+              <span class="font-titre text-2xl font-bold text-olive">{o.titre}</span>
+              <span class="text-[15px] leading-[1.55] text-texte-2">{o.texte}</span>
+              <span class="mt-auto text-[15px] font-bold text-olive">En savoir plus <span aria-hidden="true" class="inline-block transition-transform group-hover:translate-x-1">→</span></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Le diagnostic Beppe -->
+  <section id="diagnostic" class="sur-fonce bg-olive" aria-labelledby="diagnostic-titre">
+    <div class="conteneur flex flex-wrap items-center gap-10 py-20">
+      <div class="flex flex-[1_1_420px] flex-col gap-4">
+        <p class="surtitre text-etincelle">Pour commencer</p>
+        <h2 id="diagnostic-titre" class="m-0 font-titre text-[2.25rem] font-bold italic leading-[1.1] text-beige md:text-[2.5rem]">Le diagnostic Beppe</h2>
+        <p class="m-0 text-lg leading-[1.55] text-beige-doux">Avant de fabriquer quoi que ce soit, on vient voir comment vous travaillez. Une heure, chez vous ou en visio, offerte et sans engagement.</p>
+        <a href="/contact" class="bouton self-start bg-etincelle text-encre hover:bg-beige">Réserver mon diagnostic</a>
+      </div>
+      <ol class="m-0 flex flex-[1_1_420px] list-none flex-col gap-3.5 p-0">
+        <li class="flex items-baseline gap-4 rounded-carte bg-beige px-6 py-5">
+          <span aria-hidden="true" class="font-titre text-[1.75rem] font-extrabold italic leading-none text-brique">1</span>
+          <p class="m-0 text-base leading-normal text-encre">On repère avec vous les <strong>trois tâches</strong> qui vous coûtent le plus de temps.</p>
+        </li>
+        <li class="flex items-baseline gap-4 rounded-carte bg-beige px-6 py-5">
+          <span aria-hidden="true" class="font-titre text-[1.75rem] font-extrabold italic leading-none text-brique">2</span>
+          <p class="m-0 text-base leading-normal text-encre">Pour chacune, on vous dit <strong>ce qu'on peut en faire</strong>, simplement, sans jargon.</p>
+        </li>
+        <li class="flex items-baseline gap-4 rounded-carte bg-beige px-6 py-5">
+          <span aria-hidden="true" class="font-titre text-[1.75rem] font-extrabold italic leading-none text-brique">3</span>
+          <p class="m-0 text-base leading-normal text-encre">Vous repartez avec <strong>un ordre de grandeur</strong> du temps à gagner et de l'effort à prévoir. À vous de décider.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- Qui est Beppe ? -->
+  <section id="histoire" class="conteneur flex flex-wrap items-center gap-14 py-20 md:py-24" aria-labelledby="histoire-titre">
+    <div class="flex flex-[1_1_360px] justify-center">
+      <div class="flex aspect-square w-full max-w-[440px] items-end justify-center overflow-hidden rounded-3xl bg-beige-fonce">
+        <Beppe
+          variante="portrait"
+          width="92%"
+          height="92%"
+          label="Beppe, le maître d'atelier : casquette, barbe courte, crayon à l'oreille, loupe d'horloger avec une étincelle"
+        />
+      </div>
+    </div>
+    <div class="flex flex-[1_1_460px] flex-col gap-5">
+      <p class="surtitre text-brique">L'histoire</p>
+      <h2 id="histoire-titre" class="m-0 font-titre text-[2.25rem] font-bold leading-[1.1] text-olive md:text-[2.75rem]">Qui est Beppe ?</h2>
+      <p class="m-0 font-titre text-[1.375rem] leading-[1.45] text-encre">Beppe est un maître d'atelier. Pas de ceux qui vendent des machines toutes faites : de ceux qui fabriquent l'outil à la main, pour la personne qui va s'en servir.</p>
+      <p class="m-0 rounded-r-xl border-l-[3px] border-brique bg-beige-fonce px-5 py-4 text-[1.0625rem] leading-[1.55] text-encre"><strong>D'où vient son nom ?</strong> En italien, Beppe est le petit nom des Giuseppe. Tout comme Geppetto, le vieux menuisier qui sculpta Pinocchio, une marionnette de bois… qui se mit à vivre. On ne pouvait pas rêver meilleur parrain pour un atelier qui donne vie à des outils.</p>
+      <ol class="m-0 flex list-none flex-col gap-4 p-0 pt-1">
+        <li class="flex items-start gap-4">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#394429" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="shrink-0"><circle cx="10" cy="10" r="6"></circle><path d="M14.5 14.5 L20 20"></path></svg>
+          <p class="m-0 text-[1.0625rem] leading-[1.55] text-texte-2"><strong class="text-encre">D'abord, il regarde à la loupe.</strong> Votre façon de travailler, ce qui coince, ce qui vous fait perdre du temps.</p>
+        </li>
+        <li class="flex items-start gap-4">
+          <svg width="36" height="36" viewBox="0 0 120 120" aria-hidden="true" class="shrink-0">
+            <rect x="14" y="22" width="92" height="12" rx="6" fill="#394429"></rect>
+            <rect x="54" y="8" width="12" height="46" rx="6" fill="#394429"></rect>
+            <g stroke="#394429" stroke-width="6" stroke-linecap="round">
+              <line x1="22" y1="34" x2="22" y2="104"></line>
+              <line x1="98" y1="34" x2="98" y2="104"></line>
+              <line x1="60" y1="54" x2="60" y2="104"></line>
+            </g>
+          </svg>
+          <p class="m-0 text-[1.0625rem] leading-[1.55] text-texte-2"><strong class="text-encre">Puis il fabrique, en tenant trois fils</strong> : l'IA, l'automatisation et le développement. Ce sont les fils de sa croix de marionnettiste.</p>
+        </li>
+        <li class="flex items-start gap-4">
+          <svg width="36" height="36" viewBox="0 0 120 120" aria-hidden="true" class="shrink-0">
+            <rect x="14" y="22" width="92" height="12" rx="6" fill="#394429"></rect>
+            <rect x="54" y="8" width="12" height="46" rx="6" fill="#394429"></rect>
+            <g stroke="#394429" stroke-width="6" stroke-linecap="round">
+              <line x1="22" y1="34" x2="22" y2="72"></line>
+              <line x1="98" y1="34" x2="98" y2="72"></line>
+              <line x1="60" y1="54" x2="60" y2="68"></line>
+            </g>
+            <path d="M60 70 L64 80 L74 84 L64 88 L60 98 L56 88 L46 84 L56 80 Z" fill="#D4FF33" stroke="#394429" stroke-width="3" stroke-linejoin="round"></path>
+          </svg>
+          <p class="m-0 text-[1.0625rem] leading-[1.55] text-texte-2"><strong class="text-encre">Enfin, il coupe les fils.</strong> L'outil tourne tout seul. L'étincelle dans sa loupe, c'est l'IA qui prend le relais.</p>
+        </li>
+      </ol>
+      <p class="m-0 border-t border-trait pt-2 font-titre text-lg italic leading-normal text-olive">Beppe, c'est l'esprit de notre atelier. Son nom est sur la porte, et sa croix dans notre logo.</p>
+    </div>
+  </section>
+
+  <!-- Pour qui -->
+  <section class="sur-fonce bg-olive" aria-labelledby="pourqui-titre">
+    <div class="conteneur flex flex-col gap-2.5 py-16">
+      <p id="pourqui-titre" class="surtitre text-etincelle">Pour qui</p>
+      <p class="m-0 max-w-[900px] font-titre text-[1.625rem] font-semibold italic leading-[1.2] text-beige md:text-[2rem]">Artisans et BTP, industrie, négoce, services.</p>
+      <p class="m-0 max-w-[900px] text-[1.0625rem] leading-[1.55] text-beige-doux">Des artisans, des TPE et des PME, de quelques personnes à une centaine de salariés, en Maine-et-Loire, en Vendée et alentour. Des entreprises où le dirigeant connaît chacun de ses outils… et chacun de ses irritants.</p>
+    </div>
+  </section>
+
+  <Cta />
+</BaseLayout>

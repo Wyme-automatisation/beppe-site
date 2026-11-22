@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Cta from '../components/Cta.astro';
+
+const metiers = [
+  { titre: "L'IA", texte: "Lire, trier, résumer, rédiger. L'IA prend en charge le travail de texte et de documents. Elle propose, vous décidez." },
+  { titre: "L'automatisation", texte: 'Vos outils se parlent : une information saisie une fois circule partout, les tâches répétitives se font seules.' },
+  { titre: 'Le développement', texte: "Quand rien d'existant ne convient, on fabrique une petite application à la mesure de vos équipes." },
+];
+
+const etapes = [
+  { titre: 'On écoute', texte: 'Un échange pour comprendre où vous perdez du temps et ce que ça vous coûte.' },
+  { titre: 'On dessine', texte: "Une proposition claire : ce que fera l'outil, pour qui, et ce que ça change." },
+  { titre: 'On fabrique', texte: "On construit, vous testez avec vos équipes, on ajuste jusqu'à ce que ce soit juste." },
+  { titre: 'Ça tourne tout seul', texte: "On coupe les fils. L'outil est documenté, suivi, et peut évoluer avec vous." },
+];
+
+const principes = [
+  { titre: "Le problème d'abord", texte: 'On part de votre situation. La technologie vient après.' },
+  { titre: 'Le plus simple qui marche', texte: "Pas d'usine à gaz : la solution la plus simple qui règle vraiment le problème." },
+  { titre: 'Pensé pour durer', texte: 'Documenté, surveillé, facile à faire évoluer. Pas une boîte noire.' },
+];
+---
+<BaseLayout
+  title="L'atelier — Beppe | IA, automatisation, développement : notre méthode"
+  description="Trois savoir-faire, une méthode : on écoute, on dessine, on fabrique, et l'outil tourne tout seul. Beppe ajoute les pièces qui manquent à vos outils, en Maine-et-Loire et Vendée."
+>
+  <PageHero
+    fil={[{ label: 'Accueil', href: '/' }, { label: "L'atelier" }]}
+    surtitre="L'atelier"
+    titre="Trois savoir-faire, une méthode."
+    chapo="L'IA, l'automatisation et le développement, combinés selon votre besoin. Et une façon de travailler héritée de l'atelier : écouter, dessiner, fabriquer."
+  />
+
+  <!-- Nos métiers -->
+  <section class="conteneur flex flex-col gap-8 py-16 md:py-20" aria-labelledby="metiers-titre">
+    <div class="flex max-w-[720px] flex-col gap-3">
+      <p class="surtitre text-brique">Nos métiers</p>
+      <h2 id="metiers-titre" class="m-0 font-titre text-[2rem] font-bold leading-[1.15] text-olive md:text-[2.25rem]">Ce qu'on sait faire</h2>
+    </div>
+    <ul class="m-0 grid list-none gap-4 p-0 md:grid-cols-3">
+      {metiers.map((m) => (
+        <li class="flex flex-col gap-2 rounded-carte bg-white p-6">
+          <h3 class="m-0 text-lg font-bold">{m.titre}</h3>
+          <p class="m-0 text-[15px] leading-[1.55] text-texte-2">{m.texte}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- La méthode -->
+  <section class="bg-beige-fonce" aria-labelledby="methode-titre">
+    <div class="conteneur flex flex-col gap-8 py-16 md:py-20">
+      <div class="flex max-w-[720px] flex-col gap-3">
+        <p class="surtitre text-brique">La méthode</p>
+        <h2 id="methode-titre" class="m-0 font-titre text-[2rem] font-bold leading-[1.15] text-olive md:text-[2.25rem]">Comme à l'atelier, étape par étape</h2>
+      </div>
+      <ol class="m-0 grid list-none gap-8 p-0 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+        {etapes.map((e, i) => (
+          <li class="flex flex-col gap-2">
+            <span aria-hidden="true" class="font-titre text-[2.5rem] font-extrabold italic leading-none text-brique">{i + 1}</span>
+            <h3 class="m-0 text-xl font-bold">{e.titre}</h3>
+            <p class="m-0 text-[15px] leading-[1.55] text-texte-2">{e.texte}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Nos principes -->
+  <section class="conteneur flex flex-col gap-8 py-16 md:py-20" aria-labelledby="principes-titre">
+    <div class="flex max-w-[720px] flex-col gap-3">
+      <p class="surtitre text-brique">Nos principes</p>
+      <h2 id="principes-titre" class="m-0 font-titre text-[2rem] font-bold leading-[1.15] text-olive md:text-[2.25rem]">Ce à quoi on tient</h2>
+    </div>
+    <ul class="m-0 grid list-none gap-4 p-0 md:grid-cols-3">
+      {principes.map((p) => (
+        <li class="flex flex-col gap-2 rounded-carte bg-white p-6">
+          <h3 class="m-0 text-lg font-bold">{p.titre}</h3>
+          <p class="m-0 text-[15px] leading-[1.55] text-texte-2">{p.texte}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- Bandeau -->
+  <section class="sur-fonce bg-olive">
+    <div class="conteneur flex flex-col gap-3 py-16">
+      <p class="m-0 font-titre text-[1.75rem] font-semibold italic leading-[1.2] text-beige md:text-[2.25rem]">Vos outils restent les vôtres. On fabrique les pièces qui manquent.</p>
+      <p class="m-0 max-w-[720px] text-lg leading-[1.55] text-beige-doux">Pas de grand chantier ni de changement de logiciel : on ajoute la pièce qui manque, là où aujourd'hui quelqu'un recopie.</p>
+    </div>
+  </section>
+
+  <Cta />
+</BaseLayout>

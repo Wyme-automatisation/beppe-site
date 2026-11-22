@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Contact — Beppe</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&amp;family=Familjen+Grotesk:wght@400..700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#394429}a:hover{color:#1E1F17}
+</style>
+</helmet>
+<div style="width: 100%; background: #F3ECE1; font-family: 'Familjen Grotesk', system-ui, sans-serif; color: #1E1F17">
+<dc-import name="V1Header" hint-size="100%,84px"></dc-import>
+<dc-import name="Hero" fil="Accueil / Contact" surtitre="Contact" titre="Commençons par un diagnostic." chapo="Une heure, chez vous ou en visio, pour repérer les trois tâches qui vous coûtent le plus. Offert, sans engagement. Décrivez-nous la situation en quelques lignes, on vous rappelle." hint-size="100%,440px"></dc-import>
+
+<section style="max-width: 1200px; margin: 0 auto; padding: 80px 24px; display: flex; flex-wrap: wrap; gap: 48px">
+<form style="flex: 2 1 460px; padding: 32px; border-radius: 18px; background: #FFFFFF; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #1E1F17">Nom<input type="text" name="nom" autocomplete="name" style="min-height: 48px; box-sizing: border-box; padding: 12px 14px; border-radius: 10px; border: 1.5px solid #B8AF9F; background: #FFFFFF; font: inherit; font-weight: 400"></label>
+<label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #1E1F17">Entreprise<input type="text" name="entreprise" autocomplete="organization" style="min-height: 48px; box-sizing: border-box; padding: 12px 14px; border-radius: 10px; border: 1.5px solid #B8AF9F; background: #FFFFFF; font: inherit; font-weight: 400"></label>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #1E1F17">E-mail<input type="email" name="email" autocomplete="email" style="min-height: 48px; box-sizing: border-box; padding: 12px 14px; border-radius: 10px; border: 1.5px solid #B8AF9F; background: #FFFFFF; font: inherit; font-weight: 400"></label>
+<label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #1E1F17">Téléphone<input type="tel" name="telephone" autocomplete="tel" style="min-height: 48px; box-sizing: border-box; padding: 12px 14px; border-radius: 10px; border: 1.5px solid #B8AF9F; background: #FFFFFF; font: inherit; font-weight: 400"></label>
+</div>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #1E1F17">Votre demande<select name="demande" style="min-height: 48px; box-sizing: border-box; padding: 12px 14px; border-radius: 10px; border: 1.5px solid #B8AF9F; background: #FFFFFF; font: inherit; font-weight: 400"><option>Réserver un diagnostic</option><option>Poser une question</option></select></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #1E1F17">Votre secteur<select name="secteur" style="min-height: 48px; box-sizing: border-box; padding: 12px 14px; border-radius: 10px; border: 1.5px solid #B8AF9F; background: #FFFFFF; font: inherit; font-weight: 400"><option>BTP et artisans</option><option>Industrie</option><option>Négoce</option><option>Services</option><option>Autre</option></select></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #1E1F17">Qu'est-ce qui vous fait perdre du temps ?<textarea name="message" rows="5" style="box-sizing: border-box; padding: 12px 14px; border-radius: 10px; border: 1.5px solid #B8AF9F; background: #FFFFFF; font: inherit; font-weight: 400; resize: vertical"></textarea></label>
+<button type="submit" style="min-height: 52px; border: none; border-radius: 999px; background: #394429; color: #F3ECE1; font: inherit; font-size: 17px; font-weight: 700; cursor: pointer">Envoyer</button>
+</form>
+<div style="flex: 1 1 300px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 16px">
+<h2 style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-weight: 700; font-size: 1.75rem; color: #394429">Et ensuite ?</h2>
+<div style="display: flex; gap: 14px"><span style="font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 800; font-size: 1.75rem; line-height: 1; color: #C2361F">1</span><p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A4D3C"><strong style="color: #1E1F17">On vous rappelle</strong> pour fixer un moment d'échange.</p></div>
+<div style="display: flex; gap: 14px"><span style="font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 800; font-size: 1.75rem; line-height: 1; color: #C2361F">2</span><p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A4D3C"><strong style="color: #1E1F17">On écoute votre situation</strong>, chez vous ou à distance.</p></div>
+<div style="display: flex; gap: 14px"><span style="font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 800; font-size: 1.75rem; line-height: 1; color: #C2361F">3</span><p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A4D3C"><strong style="color: #1E1F17">On vous dit franchement</strong> si on peut vous aider, et comment.</p></div>
+</div>
+<div style="padding: 24px; border-radius: 16px; background: #EAE2D3; display: flex; flex-direction: column; gap: 8px; font-size: 15px; line-height: 1.5">
+<p style="margin: 0; font-weight: 700">Nous joindre directement</p>
+<p style="margin: 0">[Téléphone]</p>
+<p style="margin: 0">[contact]@beppe.fr</p>
+<p style="margin: 0; color: #4A4D3C">Maine-et-Loire, Vendée et alentours</p>
+</div>
+</div>
+</section>
+
+<dc-import name="V1Footer" hint-size="100%,260px"></dc-import>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1700}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+---
+import Logo from './Logo.astro';
+import { site, planDuSite } from '../data/site';
+---
+<footer class="sur-fonce w-full bg-encre text-beige">
+  <div class="conteneur flex flex-col gap-7 pb-7 pt-12">
+    <div class="flex flex-wrap justify-between gap-8">
+      <div class="flex flex-col gap-3">
+        <Logo variante="fonce" taille={40} />
+        <p class="m-0 font-titre text-lg italic">{site.promesse}</p>
+        <p class="m-0 text-sm text-gris-chaud">{site.metiers} — Maine-et-Loire, Vendée et alentours</p>
+      </div>
+      <nav aria-label="Plan du site">
+        <ul class="m-0 flex list-none flex-wrap items-start gap-x-7 gap-y-3 p-0 text-[15px]">
+          {planDuSite.map((lien) => (
+            <li><a href={lien.href} class="text-beige no-underline hover:text-etincelle">{lien.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+    <div class="flex flex-wrap justify-between gap-3 border-t border-trait-fonce pt-[18px] text-[13px] text-gris-chaud">
+      <span>© 2026 Beppe · beppe.fr</span>
+      <span>{site.telephone} · <a href={`mailto:${site.email}`} class="text-gris-chaud hover:text-etincelle">{site.email}</a></span>
+    </div>
+  </div>
+</footer>

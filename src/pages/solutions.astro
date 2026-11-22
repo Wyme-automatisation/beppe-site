@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+
+const solutions = [
+  {
+    id: 'interventions',
+    metiers: 'Développement · Automatisation',
+    titre: 'Interventions sur téléphone',
+    chapo: 'Vos techniciens remplissent leurs fiches sur le terrain, le bureau les reçoit aussitôt, et les heures sont prêtes pour la paie.',
+    avant: [
+      'Fiches papier remplies en retard, puis recopiées au bureau.',
+      'Heures et primes recalculées à la main pour la paie.',
+      'Fiches perdues ou illisibles.',
+    ],
+    apres: [
+      'Le technicien remplit sa fiche sur son téléphone : heures, travaux, photos, signature.',
+      'Le bureau la reçoit en temps réel et la valide.',
+      'Heures et primes exportées pour la paie.',
+    ],
+    pourQui: "Artisans, BTP, maintenance, services d'intervention.",
+  },
+  {
+    id: 'comptes-rendus',
+    metiers: 'IA · Automatisation',
+    titre: 'Comptes rendus automatiques',
+    chapo: "Vous dictez vos notes ou enregistrez l'échange, l'outil rédige le compte rendu, liste les prochaines actions et les range dans votre suivi client.",
+    avant: [
+      'Des notes griffonnées, un compte rendu repoussé, puis oublié.',
+      'Des engagements pris auprès du client qui passent à la trappe.',
+      "L'information reste dans la tête du commercial.",
+    ],
+    apres: [
+      "Vous dictez ou enregistrez, avec l'accord de votre interlocuteur.",
+      'Un compte rendu clair est rédigé en quelques minutes, vous le relisez.',
+      'Les actions et relances sont rangées dans la fiche du client.',
+    ],
+    pourQui: "Commerciaux, dirigeants, chargés d'affaires.",
+  },
+  {
+    id: 'demandes',
+    metiers: 'IA · Automatisation',
+    titre: 'Demandes entrantes',
+    chapo: "Mails, formulaires, messages : chaque demande est lue, classée, transmise à la bonne personne, et votre client reçoit aussitôt une réponse d'attente.",
+    avant: [
+      'Une boîte mail générale qui déborde.',
+      'Des demandes oubliées ou traitées deux fois.',
+      "Personne ne sait qui s'occupe de quoi.",
+    ],
+    apres: [
+      'Chaque demande est lue et classée : information, commande, réclamation, après-vente…',
+      'Elle est transmise à la bonne personne, avec un rappel si elle attend.',
+      'Le client reçoit un accusé de réception immédiat.',
+    ],
+    pourQui: 'Accueil, administratif, service client.',
+  },
+];
+---
+<BaseLayout
+  title="Nos solutions — Beppe | Interventions, comptes rendus, demandes entrantes"
+  description="Trois outils sur mesure que Beppe sait livrer aujourd'hui : fiches d'intervention sur téléphone, comptes rendus automatiques, tri des demandes entrantes. Pour les TPE et PME de Maine-et-Loire et Vendée."
+>
+  <PageHero
+    fil={[{ label: 'Accueil', href: '/' }, { label: 'Nos solutions' }]}
+    surtitre="Nos solutions"
+    titre="Ce qu'on fabrique aujourd'hui."
+    chapo="Trois outils qu'on sait livrer, pensés à partir de situations réelles. Et si votre problème est ailleurs, parlons-en."
+  />
+
+  {solutions.map((s, i) => {
+    const fonce = i % 2 === 1;
+    return (
+      <section id={s.id} class:list={['scroll-mt-4', fonce ? 'bg-beige-fonce' : 'bg-beige']} aria-labelledby={`${s.id}-titre`}>
+        <div class="conteneur flex flex-col gap-8 py-16 md:py-20">
+          <div class="flex max-w-[760px] flex-col gap-3">
+            <p class="surtitre text-brique">{s.metiers}</p>
+            <h2 id={`${s.id}-titre`} class="m-0 font-titre text-[2rem] font-bold leading-[1.15] text-olive md:text-[2.25rem]">{s.titre}</h2>
+            <p class="m-0 text-lg leading-[1.55] text-texte-2">{s.chapo}</p>
+          </div>
+          <div class="grid gap-5 md:grid-cols-2">
+            <div class:list={['flex flex-col gap-3 rounded-carte-lg p-7', fonce ? 'bg-beige' : 'bg-white']}>
+              <h3 class="m-0 text-[13px] font-bold uppercase tracking-[0.2em] text-brique">Avant</h3>
+              <ul class="m-0 flex list-disc flex-col gap-2 pl-5 text-base leading-normal text-texte-2">
+                {s.avant.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+            <div class="flex flex-col gap-3 rounded-carte-lg bg-olive p-7">
+              <h3 class="m-0 text-[13px] font-bold uppercase tracking-[0.2em] text-etincelle">Après</h3>
+              <ul class="m-0 flex list-disc flex-col gap-2 pl-5 text-base leading-normal text-beige">
+                {s.apres.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+          </div>
+          <p class="m-0 text-[15px] text-texte-2"><strong class="text-encre">Pour qui :</strong> {s.pourQui}</p>
+        </div>
+      </section>
+    );
+  })}
+
+  <section class="sur-fonce bg-olive" aria-labelledby="autre-titre">
+    <div class="conteneur flex flex-wrap items-center justify-between gap-6 py-16">
+      <div class="flex flex-[1_1_520px] flex-col gap-2.5">
+        <h2 id="autre-titre" class="m-0 font-titre text-[1.75rem] font-semibold italic leading-[1.2] text-beige md:text-[2rem]">Votre problème n'est pas dans la liste ?</h2>
+        <p class="m-0 text-[1.0625rem] leading-[1.55] text-beige-doux">Ces trois outils sont des points de départ. Si une tâche répétitive vous fait perdre du temps, il y a sûrement un outil à fabriquer.</p>
+      </div>
+      <a href="/contact" class="bouton bg-etincelle text-encre hover:bg-beige">Racontez-nous</a>
+    </div>
+  </section>
+</BaseLayout>

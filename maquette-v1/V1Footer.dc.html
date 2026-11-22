@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Beppe — pied de page (v1)</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..900;1,9..144,400..900&amp;family=Familjen+Grotesk:wght@400..700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#F3ECE1}a:hover{color:#D4FF33}
+</style>
+</helmet>
+<footer style="width: 100%; background: #1E1F17; font-family: 'Familjen Grotesk', system-ui, sans-serif; color: #F3ECE1">
+<div style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 28px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; align-items: center; gap: 10px">
+<svg width="40" height="40" viewBox="0 0 120 120" aria-hidden="true">
+<rect x="14" y="22" width="92" height="12" rx="6" fill="#F3ECE1"></rect>
+<rect x="54" y="8" width="12" height="46" rx="6" fill="#F3ECE1"></rect>
+<line x1="22" y1="34" x2="22" y2="72" stroke="#F3ECE1" stroke-width="4" stroke-linecap="round"></line>
+<line x1="98" y1="34" x2="98" y2="72" stroke="#F3ECE1" stroke-width="4" stroke-linecap="round"></line>
+<line x1="60" y1="54" x2="60" y2="68" stroke="#F3ECE1" stroke-width="4" stroke-linecap="round"></line>
+<line x1="25" y1="84" x2="25" y2="106" stroke="#F3ECE1" stroke-width="4" stroke-linecap="round" opacity="0.3"></line>
+<line x1="95" y1="84" x2="95" y2="106" stroke="#F3ECE1" stroke-width="4" stroke-linecap="round" opacity="0.3"></line>
+<line x1="60" y1="96" x2="60" y2="110" stroke="#F3ECE1" stroke-width="4" stroke-linecap="round" opacity="0.3"></line>
+<path d="M60 70 L63.5 78.5 L72 82 L63.5 85.5 L60 94 L56.5 85.5 L48 82 L56.5 78.5 Z" fill="#D4FF33"></path>
+</svg>
+<span style="font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 800; font-size: 30px; color: #F3ECE1">Beppe</span>
+</div>
+<p style="margin: 0; font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 18px">On fabrique vos outils sur mesure.</p>
+<p style="margin: 0; font-size: 14px; color: #C9C2B4">IA · Automatisation · Développement — Maine-et-Loire, Vendée et alentours</p>
+</div>
+<nav aria-label="Plan du site" style="display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: flex-start; font-size: 15px">
+<a href="V1-Accueil.dc.html" style="text-decoration: none">Accueil</a>
+<a href="V1-Solutions.dc.html" style="text-decoration: none">Nos solutions</a>
+<a href="V1-Atelier.dc.html" style="text-decoration: none">L'atelier</a>
+<a href="V1-Contact.dc.html" style="text-decoration: none">Contact</a>
+<a href="V1-Mentions.dc.html" style="text-decoration: none">Mentions légales</a>
+</nav>
+</div>
+<div style="padding-top: 18px; border-top: 1px solid #3A3B31; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 13px; color: #C9C2B4">
+<span>© 2026 Beppe · beppe.fr</span>
+<span>[Téléphone] · [contact]@beppe.fr</span>
+</div>
+</div>
+</footer>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":260}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>
