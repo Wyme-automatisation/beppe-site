@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Beppe from '../components/Beppe.astro';
+import { site } from '../data/site';
+---
+<BaseLayout
+  title="Page introuvable | Beppe"
+  description="Cette page n'existe pas ou a été déplacée. Retrouvez les outils sur mesure de Beppe pour les PME : solutions, atelier et diagnostic offert."
+  noindex
+>
+  <section class="sur-fonce relative overflow-hidden bg-olive">
+    <Beppe
+      variante="filigrane-simple"
+      width="420"
+      height="420"
+      class="pointer-events-none absolute -bottom-[70px] -right-[60px] opacity-[0.12]"
+    />
+    <div class="conteneur relative flex flex-col gap-5 pb-20 pt-16 md:pb-24 md:pt-20">
+      <p class="surtitre text-etincelle">Erreur 404</p>
+      <h1 class="m-0 max-w-[760px] font-titre text-[2.5rem] font-bold italic leading-[1.05] text-beige md:text-[3.5rem]">Cette page n'existe pas.</h1>
+      <p class="m-0 max-w-[620px] text-[1.2rem] leading-[1.55] text-beige-doux">Elle a peut-être été déplacée, ou l'adresse contient une faute de frappe.</p>
+      <div class="flex flex-wrap gap-3.5 pt-2">
+        <a href="/" class="bouton bg-etincelle text-encre hover:bg-beige">Retour à l'accueil</a>
+        <a href="/solutions" class="bouton border-2 border-beige text-beige hover:bg-beige hover:text-olive">Voir nos solutions</a>
+      </div>
+    </div>
+  </section>
+  <section class="conteneur py-14">
+    <p class="m-0 text-lg leading-[1.55] text-texte-2">
+      Vous cherchiez à nous joindre ? <a href="/contact" class="font-semibold text-olive underline hover:text-encre">Réservez votre diagnostic</a> ou écrivez-nous à <a href={`mailto:${site.email}`} class="font-semibold text-olive underline hover:text-encre">{site.email}</a>.
+    </p>
+  </section>
+</BaseLayout>

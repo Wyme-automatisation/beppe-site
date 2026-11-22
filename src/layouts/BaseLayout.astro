@@ -3,28 +3,73 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { site } from '../data/site';
+// Polices utilisées dès le haut de page : préchargées pour un affichage plus rapide du titre
+import policeTitre from '@fontsource-variable/fraunces/files/fraunces-latin-opsz-italic.woff2?url';
+import policeTexte from '@fontsource-variable/familjen-grotesk/files/familjen-grotesk-latin-wght-normal.woff2?url';
 
 interface Props {
   title: string;
   description: string;
-  /** Masquer la page des moteurs de recherche (ex. mentions légales) */
+  /** Masquer la page des moteurs de recherche (ex. page 404) */
   noindex?: boolean;
+  /** Données structurées propres à la page (ajoutées au graphe commun) */
+  schema?: Record<string, unknown>[];
 }
-const { title, description, noindex = false } = Astro.props;
+const { title, description, noindex = false, schema = [] } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL('/og-beppe.png', Astro.site).href;
+const idEntreprise = `${site.url}/#beppe`;
 
-const localBusiness = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: site.nom,
-  slogan: site.promesse,
-  description:
-    "Atelier qui fabrique des outils numériques sur mesure (IA, automatisation, développement) pour les artisans, TPE et PME.",
-  url: site.url,
-  email: site.email,
-  areaServed: site.zone.map((name) => ({ '@type': 'AdministrativeArea', name })),
-  knowsAbout: ['Intelligence artificielle', 'Automatisation', 'Développement sur mesure'],
-};
+// Données structurées communes : l'entreprise (avec ses 3 services) et le site.
+// Tout ce qui est déclaré ici est visible sur le site (accueil, solutions, mentions légales).
+const graphe = [
+  {
+    '@type': 'ProfessionalService',
+    '@id': idEntreprise,
+    name: site.nom,
+    legalName: 'WYME',
+    slogan: site.promesse,
+    description:
+      'Atelier qui fabrique des outils numériques sur mesure (IA, automatisation, développement) pour les artisans, TPE et PME.',
+    url: `${site.url}/`,
+    logo: `${site.url}/logo-beppe.png`,
+    image: ogImage,
+    email: site.email,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '15 rue Lazare Hoche',
+      postalCode: '49300',
+      addressLocality: 'Cholet',
+      addressRegion: 'Pays de la Loire',
+      addressCountry: 'FR',
+    },
+    areaServed: [
+      { '@type': 'AdministrativeArea', name: 'Maine-et-Loire' },
+      { '@type': 'AdministrativeArea', name: 'Vendée' },
+      { '@type': 'AdministrativeArea', name: 'Pays de la Loire' },
+    ],
+    knowsAbout: ['Intelligence artificielle', 'Automatisation des processus', "Développement d'applications métier"],
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Nos solutions',
+      itemListElement: [
+        { '@type': 'Offer', itemOffered: { '@id': `${site.url}/solutions#interventions` } },
+        { '@type': 'Offer', itemOffered: { '@id': `${site.url}/solutions#comptes-rendus` } },
+        { '@type': 'Offer', itemOffered: { '@id': `${site.url}/solutions#demandes` } },
+      ],
+    },
+  },
+  {
+    '@type': 'WebSite',
+    '@id': `${site.url}/#site`,
+    url: `${site.url}/`,
+    name: site.nom,
+    inLanguage: 'fr-FR',
+    publisher: { '@id': idEntreprise },
+  },
+  ...schema,
+];
+const jsonLd = { '@context': 'https://schema.org', '@graph': graphe };
 ---
 <!doctype html>
 <html lang="fr">
@@ -35,7 +80,10 @@ const localBusiness = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
+    <link rel="preload" href={policeTitre} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={policeTexte} as="font" type="font/woff2" crossorigin />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="theme-color" content="#394429" />
 
@@ -45,9 +93,13 @@ const localBusiness = {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta name="twitter:card" content="summary" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Beppe — On fabrique vos outils sur mesure. IA, automatisation, développement." />
+    <meta name="twitter:card" content="summary_large_image" />
 
-    <script type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
     <a

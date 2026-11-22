@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
 
 const solutions = [
   {
@@ -55,10 +56,24 @@ const solutions = [
     pourQui: 'Accueil, administratif, service client.',
   },
 ];
+
+// Données structurées : un Service par solution, reprenant le texte affiché
+const services = solutions.map((s) => ({
+  '@type': 'Service',
+  '@id': `${site.url}/solutions#${s.id}`,
+  name: s.titre,
+  description: s.chapo,
+  serviceType: s.metiers.replace(' · ', ', '),
+  audience: { '@type': 'BusinessAudience', name: s.pourQui.replace(/\.$/, '') },
+  provider: { '@id': `${site.url}/#beppe` },
+  areaServed: site.zone.map((name) => ({ '@type': 'AdministrativeArea', name })),
+  url: `${site.url}/solutions#${s.id}`,
+}));
 ---
 <BaseLayout
-  title="Nos solutions — Beppe | Interventions, comptes rendus, demandes entrantes"
-  description="Trois outils sur mesure que Beppe sait livrer aujourd'hui : fiches d'intervention sur téléphone, comptes rendus automatiques, tri des demandes entrantes. Pour les TPE et PME de Maine-et-Loire et Vendée."
+  title="Fiches d'intervention, comptes rendus, tri des demandes | Beppe"
+  description="Trois outils sur mesure pour PME : fiches d'intervention sur téléphone, comptes rendus automatiques et tri des demandes entrantes. Avant / après concrets."
+  schema={services}
 >
   <PageHero
     fil={[{ label: 'Accueil', href: '/' }, { label: 'Nos solutions' }]}
@@ -102,6 +117,7 @@ const solutions = [
       <div class="flex flex-[1_1_520px] flex-col gap-2.5">
         <h2 id="autre-titre" class="m-0 font-titre text-[1.75rem] font-semibold italic leading-[1.2] text-beige md:text-[2rem]">Votre problème n'est pas dans la liste ?</h2>
         <p class="m-0 text-[1.0625rem] leading-[1.55] text-beige-doux">Ces trois outils sont des points de départ. Si une tâche répétitive vous fait perdre du temps, il y a sûrement un outil à fabriquer.</p>
+        <a href="/atelier" class="self-start text-[1.0625rem] font-semibold text-beige underline decoration-2 underline-offset-4 hover:text-etincelle">Découvrir notre méthode</a>
       </div>
       <a href="/contact" class="bouton bg-etincelle text-encre hover:bg-beige">Racontez-nous</a>
     </div>

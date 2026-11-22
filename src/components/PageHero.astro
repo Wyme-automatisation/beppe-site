@@ -10,7 +10,20 @@ interface Props {
   chapo: string;
 }
 const { fil, surtitre, titre, chapo } = Astro.props;
+
+// Fil d'Ariane en données structurées (identique au fil affiché)
+const filLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: fil.map((etape, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: etape.label,
+    item: new URL(etape.href ?? Astro.url.pathname, Astro.site).href,
+  })),
+};
 ---
+<script type="application/ld+json" set:html={JSON.stringify(filLd)} />
 <section class="sur-fonce relative w-full overflow-hidden bg-olive text-beige">
   <Beppe
     variante="filigrane-simple"

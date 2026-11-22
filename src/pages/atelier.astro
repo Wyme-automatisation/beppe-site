@@ -4,9 +4,9 @@ import PageHero from '../components/PageHero.astro';
 import Cta from '../components/Cta.astro';
 
 const metiers = [
-  { titre: "L'IA", texte: "Lire, trier, résumer, rédiger. L'IA prend en charge le travail de texte et de documents. Elle propose, vous décidez." },
-  { titre: "L'automatisation", texte: 'Vos outils se parlent : une information saisie une fois circule partout, les tâches répétitives se font seules.' },
-  { titre: 'Le développement', texte: "Quand rien d'existant ne convient, on fabrique une petite application à la mesure de vos équipes." },
+  { titre: "L'IA", texte: "Lire, trier, résumer, rédiger. L'IA prend en charge le travail de texte et de documents. Elle propose, vous décidez.", exemple: { label: 'Comptes rendus automatiques', href: '/solutions#comptes-rendus' } },
+  { titre: "L'automatisation", texte: 'Vos outils se parlent : une information saisie une fois circule partout, les tâches répétitives se font seules.', exemple: { label: 'Demandes entrantes', href: '/solutions#demandes' } },
+  { titre: 'Le développement', texte: "Quand rien d'existant ne convient, on fabrique une petite application à la mesure de vos équipes.", exemple: { label: 'Interventions sur téléphone', href: '/solutions#interventions' } },
 ];
 
 const etapes = [
@@ -23,8 +23,8 @@ const principes = [
 ];
 ---
 <BaseLayout
-  title="L'atelier — Beppe | IA, automatisation, développement : notre méthode"
-  description="Trois savoir-faire, une méthode : on écoute, on dessine, on fabrique, et l'outil tourne tout seul. Beppe ajoute les pièces qui manquent à vos outils, en Maine-et-Loire et Vendée."
+  title="IA, automatisation, développement sur mesure : la méthode | Beppe"
+  description="L'IA, l'automatisation et le développement au service des PME : on écoute, on dessine, on fabrique, et l'outil tourne tout seul. Vos outils restent les vôtres."
 >
   <PageHero
     fil={[{ label: 'Accueil', href: '/' }, { label: "L'atelier" }]}
@@ -44,6 +44,7 @@ const principes = [
         <li class="flex flex-col gap-2 rounded-carte bg-white p-6">
           <h3 class="m-0 text-lg font-bold">{m.titre}</h3>
           <p class="m-0 text-[15px] leading-[1.55] text-texte-2">{m.texte}</p>
+          <a href={m.exemple.href} class="mt-auto pt-1 text-[15px] font-bold text-olive no-underline hover:text-encre">Exemple : {m.exemple.label} <span aria-hidden="true">→</span></a>
         </li>
       ))}
     </ul>

@@ -19,8 +19,8 @@ const outils = [
 ];
 ---
 <BaseLayout
-  title="Beppe — on fabrique vos outils sur mesure | IA, automatisation, développement"
-  description="Beppe fabrique des outils numériques sur mesure (IA, automatisation, développement) pour les artisans, TPE et PME en Maine-et-Loire et en Vendée. Diagnostic d'une heure offert."
+  title="IA et automatisation pour PME en Vendée et Maine-et-Loire | Beppe"
+  description="Beppe fabrique des outils sur mesure (IA, automatisation, développement) pour les artisans, TPE et PME de Vendée et Maine-et-Loire. Diagnostic d'1 h offert."
 >
   <!-- Haut de page -->
   <section id="haut" class="sur-fonce relative overflow-hidden bg-olive">
@@ -31,8 +31,11 @@ const outils = [
       class="pointer-events-none absolute -bottom-[60px] -right-[200px] w-[420px] opacity-[0.14] sm:-right-[80px] sm:w-[560px]"
     />
     <div class="conteneur relative flex flex-col gap-7 pb-24 pt-20 md:pb-[120px] md:pt-28">
-      <p class="m-0 text-[13px] font-bold uppercase tracking-[0.2em] text-etincelle sm:text-[15px]">IA · Automatisation · Développement</p>
-      <h1 class="m-0 max-w-[820px] font-titre text-[2.75rem] font-bold italic leading-[1.02] text-beige sm:text-[3.5rem] lg:text-[4.5rem]">On fabrique vos outils sur mesure.</h1>
+      <!-- Les métiers font partie du H1 (texte visible, même rendu qu'un surtitre) -->
+      <h1 class="m-0 flex flex-col gap-7">
+        <span class="font-texte text-[13px] font-bold not-italic uppercase tracking-[0.2em] text-etincelle sm:text-[15px]">IA · Automatisation · Développement<span class="sr-only"> :</span></span>
+        <span class="max-w-[820px] font-titre text-[2.75rem] font-bold italic leading-[1.02] text-beige sm:text-[3.5rem] lg:text-[4.5rem]">On fabrique vos outils sur mesure.</span>
+      </h1>
       <p class="m-0 max-w-[640px] text-lg leading-[1.55] text-beige-doux sm:text-xl">Pour les artisans, TPE et PME qui en ont assez des ressaisies, des papiers qui se perdent et des informations éparpillées. On part de votre façon de travailler, et on construit l'outil qui tourne tout seul.</p>
       <div class="flex flex-wrap gap-3.5 pt-2">
         <a href="/contact" class="bouton bg-etincelle text-encre hover:bg-beige">Réserver mon diagnostic</a>
@@ -69,7 +72,7 @@ const outils = [
         {outils.map((o) => (
           <li class="flex">
             <a href={o.href} class="group flex w-full flex-col gap-2.5 rounded-carte-lg bg-beige p-7 text-encre no-underline outline-offset-4 transition-shadow hover:shadow-[0_0_0_2px_var(--color-olive)]">
-              <span class="font-titre text-2xl font-bold text-olive">{o.titre}</span>
+              <h3 class="m-0 font-titre text-2xl font-bold text-olive">{o.titre}</h3>
               <span class="text-[15px] leading-[1.55] text-texte-2">{o.texte}</span>
               <span class="mt-auto text-[15px] font-bold text-olive">En savoir plus <span aria-hidden="true" class="inline-block transition-transform group-hover:translate-x-1">→</span></span>
             </a>
@@ -154,13 +157,14 @@ const outils = [
         </li>
       </ol>
       <p class="m-0 border-t border-trait pt-2 font-titre text-lg italic leading-normal text-olive">Beppe, c'est l'esprit de notre atelier. Son nom est sur la porte, et sa croix dans notre logo.</p>
+      <a href="/atelier" class="self-start text-[15px] font-bold text-olive no-underline hover:text-encre">Découvrir l'atelier et notre méthode <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
   <!-- Pour qui -->
   <section class="sur-fonce bg-olive" aria-labelledby="pourqui-titre">
     <div class="conteneur flex flex-col gap-2.5 py-16">
-      <p id="pourqui-titre" class="surtitre text-etincelle">Pour qui</p>
+      <h2 id="pourqui-titre" class="surtitre text-etincelle">Pour qui</h2>
       <p class="m-0 max-w-[900px] font-titre text-[1.625rem] font-semibold italic leading-[1.2] text-beige md:text-[2rem]">Artisans et BTP, industrie, négoce, services.</p>
       <p class="m-0 max-w-[900px] text-[1.0625rem] leading-[1.55] text-beige-doux">Des artisans, des TPE et des PME, de quelques personnes à une centaine de salariés, en Maine-et-Loire, en Vendée et alentour. Des entreprises où le dirigeant connaît chacun de ses outils… et chacun de ses irritants.</p>
     </div>
